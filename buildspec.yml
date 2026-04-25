@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      - aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 148908330752.dkr.ecr.eu-north-1.amazonaws.com
+
+  build:
+    commands:
+      - echo Build started
+      - docker build -t task-api .
+      - docker tag task-api:latest 148908330752.dkr.ecr.eu-north-1.amazonaws.com/task-api:latest
+
+  post_build:
+    commands:
+      - echo Pushing image
+      - docker push 148908330752.dkr.ecr.eu-north-1.amazonaws.com/task-api:latest
