@@ -17,18 +17,18 @@ phases:
       - docker tag task-api:latest 148908330752.dkr.ecr.eu-north-1.amazonaws.com/task-api:$IMAGE_TAG
 
   post_build:
-  commands:
-    - echo Pushing image...
-    - docker push 148908330752.dkr.ecr.eu-north-1.amazonaws.com/task-api:latest
-    - docker push 148908330752.dkr.ecr.eu-north-1.amazonaws.com/task-api:$IMAGE_TAG
+    commands:
+      - echo Pushing image...
+      - docker push 148908330752.dkr.ecr.eu-north-1.amazonaws.com/task-api:latest
+      - docker push 148908330752.dkr.ecr.eu-north-1.amazonaws.com/task-api:$IMAGE_TAG
 
-    - echo Prepare new task definition...
-    - sed "s|IMAGE_TAG|$IMAGE_TAG|g" taskdef.json > taskdef_rendered.json
-    - cat taskdef_rendered.json
+      - echo Prepare new task definition...
+      - sed "s|IMAGE_TAG|$IMAGE_TAG|g" taskdef.json > taskdef_rendered.json
+      - cat taskdef_rendered.json
 
-    - echo Register new task definition...
-    - "TASK_DEF_ARN=$(aws ecs register-task-definition --cli-input-json file://taskdef_rendered.json --region eu-north-1 --query 'taskDefinition.taskDefinitionArn' --output text)"
-    - echo "New task definition: $TASK_DEF_ARN"
+      - echo Register new task definition...
+      - "TASK_DEF_ARN=$(aws ecs register-task-definition --cli-input-json file://taskdef_rendered.json --region eu-north-1 --query 'taskDefinition.taskDefinitionArn' --output text)"
+      - echo "New task definition: $TASK_DEF_ARN"
 
-    - echo Deploying to ECS...
-    - aws ecs update-service --cluster task-cluster --service task-api-service-86o201j5 --task-definition $TASK_DEF_ARN --force-new-deployment --health-check-grace-period-seconds 60 --region eu-north-1
+      - echo Deploying to ECS...
+      - aws ecs update-service --cluster task-cluster --service task-api-service-86o201j5 --task-definition $TASK_DEF_ARN --force-new-deployment --health-check-grace-period-seconds 30 --region eu-north-1
