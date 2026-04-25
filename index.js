@@ -1,5 +1,6 @@
  
-const VERSION = "v5-pipeline-test";
+const VERSION = "v6-auto-deploy";git add .
+git commit -m "test deploy"
 const express = require("express");
 const { Pool } = require("pg");
 
