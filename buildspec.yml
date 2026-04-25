@@ -10,12 +10,12 @@ phases:
   build:
     commands:
       - echo Build started
-      - docker build -t task-api .
+      - docker build --no-cache -t task-api .    
       - docker tag task-api:latest 148908330752.dkr.ecr.eu-north-1.amazonaws.com/task-api:latest
 
   post_build:
     commands:
-      - echo Pushing image right...
+      - echo Pushing image right..
       - docker push 148908330752.dkr.ecr.eu-north-1.amazonaws.com/task-api:latest
       - echo Deploying to ECS...
       - aws ecs update-service --cluster task-cluster --service task-api-service-86o201j5 --force-new-deployment --region eu-north-1
