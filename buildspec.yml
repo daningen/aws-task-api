@@ -10,12 +10,17 @@ phases:
   build:
     commands:
       - echo Build started
-      - docker build --no-cache -t task-api .    
+      - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - echo "IMAGE TAG = $IMAGE_TAG"
+      - docker build -t task-api .
       - docker tag task-api:latest 148908330752.dkr.ecr.eu-north-1.amazonaws.com/task-api:latest
+      - docker tag task-api:latest 148908330752.dkr.ecr.eu-north-1.amazonaws.com/task-api:$IMAGE_TAG
 
   post_build:
     commands:
-      - echo Pushing image right..
+      - echo Pushing image...
       - docker push 148908330752.dkr.ecr.eu-north-1.amazonaws.com/task-api:latest
+      - docker push 148908330752.dkr.ecr.eu-north-1.amazonaws.com/task-api:$IMAGE_TAG
+
       - echo Deploying to ECS...
       - aws ecs update-service --cluster task-cluster --service task-api-service-86o201j5 --force-new-deployment --region eu-north-1
