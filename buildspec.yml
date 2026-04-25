@@ -1,4 +1,4 @@
-version: 0.2
+version: 0.3
 
 phases:
   pre_build:
@@ -15,7 +15,7 @@ phases:
 
   post_build:
     commands:
-      - echo Pushing image...
+      - echo Pushing image.n Now reading from latest spec from git..
       - docker push 148908330752.dkr.ecr.eu-north-1.amazonaws.com/task-api:latest
       - echo Deploying to ECS...
       - aws ecs update-service \
