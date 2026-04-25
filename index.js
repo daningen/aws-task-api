@@ -5,7 +5,7 @@ const express = require("express");
 const { Pool } = require("pg");
 
 const app = express();
-const cors = require("cors"); // Tillåter anrop från frontend (t.ex. Amplify) till API:t
+const cors = require("cors"); // Tillåter anrop från frontend (t.ex. Amplify) till API:t  
 
 const fs = require("fs");
 app.use(express.json());
