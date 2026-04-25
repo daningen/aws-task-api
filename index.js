@@ -1,5 +1,5 @@
  
-const VERSION = "v6-auto-deploy"; 
+const VERSION = "v6-auto-deploy x"; 
 git commit -m "test deploy"
 const express = require("express");
 const { Pool } = require("pg");
