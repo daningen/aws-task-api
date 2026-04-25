@@ -1,0 +1,19 @@
+x{
+  "family": "task-api",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "containerDefinitions": [
+    {
+      "name": "task-api",
+      "image": "148908330752.dkr.ecr.eu-north-1.amazonaws.com/task-api:IMAGE_TAG",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 3000
+        }
+      ]
+    }
+  ]
+}

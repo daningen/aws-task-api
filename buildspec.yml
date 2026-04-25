@@ -22,5 +22,11 @@ phases:
       - docker push 148908330752.dkr.ecr.eu-north-1.amazonaws.com/task-api:latest
       - docker push 148908330752.dkr.ecr.eu-north-1.amazonaws.com/task-api:$IMAGE_TAG
 
+      - echo Prepare new task definition...
+      - sed "s|IMAGE_TAG|$IMAGE_TAG|g" taskdef.json > taskdef_rendered.json
+
+      - echo Register new task definition...
+      - aws ecs register-task-definition --cli-input-json file://taskdef_rendered.json --region eu-north-1
+
       - echo Deploying to ECS...
-      - aws ecs update-service --cluster task-cluster --service task-api-service-86o201j5 --force-new-deployment --region eu-north-1
+      - aws ecs update-service --cluster task-cluster --service task-api-service-86o201j5 --task-definition task-api --region eu-north-1
