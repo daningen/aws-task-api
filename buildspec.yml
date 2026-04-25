@@ -15,10 +15,7 @@ phases:
 
   post_build:
     commands:
-      - echo Pushing image.n Now reading from latest spec from git..
+      - echo Pushing image right...
       - docker push 148908330752.dkr.ecr.eu-north-1.amazonaws.com/task-api:latest
       - echo Deploying to ECS...
-      - aws ecs update-service \
-          --cluster task-cluster \
-          --service task-api-service-86o20j15 \
-          --force-new-deployment
+      - aws ecs update-service --cluster task-cluster --service task-api-service-86o20j15 --force-new-deployment
