@@ -4,6 +4,7 @@
   "requiresCompatibilities": ["FARGATE"],
   "cpu": "256",
   "memory": "512",
+  "executionRoleArn": "arn:aws:iam::148908330752:role/ecsTaskExecutionRole",
   "containerDefinitions": [
     {
       "name": "task-api",
