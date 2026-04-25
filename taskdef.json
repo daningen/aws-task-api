@@ -1,4 +1,4 @@
-x{
+{
   "family": "task-api",
   "networkMode": "awsvpc",
   "requiresCompatibilities": ["FARGATE"],
