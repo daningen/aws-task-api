@@ -1,5 +1,5 @@
  
-const VERSION = "v4-crud";
+const VERSION = "v5-pipeline-test";
 const express = require("express");
 const { Pool } = require("pg");
 
@@ -20,6 +20,7 @@ const pool = new Pool({
     rejectUnauthorized: false,
   },
 });
+
 
 async function initDB() {
   try {
