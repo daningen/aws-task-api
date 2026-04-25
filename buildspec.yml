@@ -27,8 +27,13 @@ phases:
       - cat taskdef_rendered.json
 
       - echo Register new task definition...
-      - "TASK_DEF_ARN=$(aws ecs register-task-definition --cli-input-json file://taskdef_rendered.json --region eu-north-1 --query 'taskDefinition.taskDefinitionArn' --output text)"
-      - echo "New task definition: $TASK_DEF_ARN"
+      - |
+        TASK_DEF_ARN=$(aws ecs register-task-definition \
+          --cli-input-json file://taskdef_rendered.json \
+          --region eu-north-1 \
+          --query 'taskDefinition.taskDefinitionArn' \
+          --output text)
+        echo "New task definition: $TASK_DEF_ARN"
 
       - echo Deploying to ECS...
       - aws ecs update-service --cluster task-cluster --service task-api-service-86o201j5 --task-definition $TASK_DEF_ARN --force-new-deployment --health-check-grace-period-seconds 30 --region eu-north-1
