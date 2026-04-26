@@ -1,5 +1,5 @@
  
-const VERSION = "v6-auto-deploy"; 
+const VERSION = "v7-auto-deploy"; 
 
 const express = require("express");
 const { Pool } = require("pg");
@@ -62,6 +62,7 @@ app.get("/health", async (req, res) => {
     res.json({ status: "ok", db: "disconnected", version: VERSION });
   }
 });
+
 
 // Hämta tasks från DB
 app.get("/tasks", async (req, res) => {
