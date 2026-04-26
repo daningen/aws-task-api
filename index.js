@@ -25,6 +25,11 @@ const pool = new Pool({
 
 async function initDB() {
   try {
+    if (!fs.existsSync("./init.sql")) {
+      console.log("init.sql not found, skipping DB init");
+      return;
+    }
+
     const sql = fs.readFileSync("./init.sql", "utf8");
     await pool.query(sql);
     console.log("DB initialized from init.sql");
@@ -33,7 +38,9 @@ async function initDB() {
   }
 }
 
-initDB();
+initDB().catch(err => {
+  console.error("InitDB crashed", err);
+});
 
 app.get("/", (req, res) => {
   res.json({
@@ -130,6 +137,7 @@ app.put("/tasks/:id", async (req, res) => {
   }
 });
 
+console.log("Starting app...");
 app.listen(3000, "0.0.0.0", () => {
   console.log("Running on port 3000");
 });
