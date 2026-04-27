@@ -10,6 +10,13 @@ const cors = require("cors"); // Tillåter anrop från frontend (t.ex. Amplify) 
 const fs = require("fs");
 app.use(express.json());
 
+// Tillåter endast anrop från min frontend-domän.
+// Detta krävs eftersom API:t nås via CloudFront (annan origin).
+// Att begränsa origin är säkrare än att tillåta alla (*).
+app.use(cors({
+  origin: "https://main.d27vh4ztyhscep.amplifyapp.com"
+}));
+
 // Hämta från ECS env vars
 const pool = new Pool({
   host: process.env.DB_HOST,
