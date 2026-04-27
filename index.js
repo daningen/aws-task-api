@@ -1,5 +1,5 @@
  
-const VERSION = "v8-auto-deploy"; 
+const VERSION = "v9-cors"; 
 
 const express = require("express");
 const { Pool } = require("pg");
