@@ -1,5 +1,5 @@
  
-const VERSION = "v9-cors"; 
+const VERSION = "v10-cors-fix"; 
 
 const express = require("express");
 const { Pool } = require("pg");
