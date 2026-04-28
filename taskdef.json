@@ -12,7 +12,30 @@
       "essential": true,
       "portMappings": [
         {
-          "containerPort": 3000
+          "containerPort": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "secrets": [
+        {
+          "name": "DB_HOST",
+          "valueFrom": "arn:aws:secretsmanager:eu-north-1:148908330752:secret:task-api-db-YdOn98:DB_HOST::"
+        },
+        {
+          "name": "DB_PORT",
+          "valueFrom": "arn:aws:secretsmanager:eu-north-1:148908330752:secret:task-api-db-YdOn98:DB_PORT::"
+        },
+        {
+          "name": "DB_USER",
+          "valueFrom": "arn:aws:secretsmanager:eu-north-1:148908330752:secret:task-api-db-YdOn98:DB_USER::"
+        },
+        {
+          "name": "DB_PASSWORD",
+          "valueFrom": "arn:aws:secretsmanager:eu-north-1:148908330752:secret:task-api-db-YdOn98:DB_PASSWORD::"
+        },
+        {
+          "name": "DB_NAME",
+          "valueFrom": "arn:aws:secretsmanager:eu-north-1:148908330752:secret:task-api-db-YdOn98:DB_NAME::"
         }
       ]
     }

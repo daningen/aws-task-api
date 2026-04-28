@@ -1,5 +1,5 @@
  
-const VERSION = "v11-test"; 
+const VERSION = "v12-taskjson-updated"; 
 
 const express = require("express");
 const { Pool } = require("pg");
